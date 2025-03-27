@@ -1,0 +1,36 @@
+.contactHeader {
+    font-family: "Montserrat", sans-serif;
+    background-color: var(--secondary-bg-color);
+    padding: 10px 30px;
+    color: var(--light-text-color);
+
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+
+.contacts {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0.2px;
+    font-size: 14px;
+
+    li {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 3px;
+    }
+}
+
+.socials {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
