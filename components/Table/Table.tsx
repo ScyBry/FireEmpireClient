@@ -1,6 +1,6 @@
 "use client"
 
-import {useState} from "react";
+import {Fragment, useState} from "react";
 import {
     Collapse,
     IconButton,
@@ -14,13 +14,57 @@ import {
 } from "@mui/material";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import AddIcon from '@mui/icons-material/Add';
+import {AddCategoryForm} from "@/components/AddCategoryForm/AddCategoryForm";
 
+const TABLE_HEAD: string[] = [
+    "Название",
+    "Время",
+    "Видео",
+    "Цена",
+    "Класс опасности",
+    "Общее количество",
+    "Свободно"
+]
+
+
+export const CollapsibleTable = () => {
+    const [openAddCategoryModal, setOpenAddCategoryModal] = useState(false);
+    return (
+        <Paper>
+            <TableContainer component={Paper}>
+                <Table>
+                    <TableHead>
+                        {TABLE_HEAD.map((header) => (
+                            <TableCell key={header}>
+                                {header}
+                            </TableCell>
+                        ))}
+                        <TableCell>
+                            <IconButton onClick={() => {
+                                setOpenAddCategoryModal(true)
+                            }}>
+                                <AddIcon/>
+                            </IconButton>
+                        </TableCell>
+                    </TableHead>
+                    <TableBody>
+                        <Row/>
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <AddCategoryForm open={openAddCategoryModal} onClose={() => setOpenAddCategoryModal(false)}
+                             onSave={() => console.log("save")}/>
+        </Paper>
+    )
+}
 
 const Row = () => {
     const [open, setOpen] = useState(false);
 
+
     return (
-        <>
+        <Fragment>
             <TableRow>
                 <TableCell>
                     <IconButton
@@ -34,7 +78,7 @@ const Row = () => {
                 </TableCell>
             </TableRow>
             <TableRow>
-                <TableCell>
+                <TableCell colSpan={8}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <div>
                             <Table size="small">
@@ -45,21 +89,6 @@ const Row = () => {
                     </Collapse>
                 </TableCell>
             </TableRow>
-        </>
-    )
-}
-
-export const CollapsibleTable = () => {
-    return (
-        <TableContainer component={Paper}>
-            <Table>
-                <TableHead>
-                    Заголовк главной таблицы
-                </TableHead>
-                <TableBody>
-                    <Row/>
-                </TableBody>
-            </Table>
-        </TableContainer>
+        </Fragment>
     )
 }
